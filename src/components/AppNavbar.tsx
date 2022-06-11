@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-// import { NavLink as Link } from 'react-router-dom'
+import { NavLink as Link } from 'react-router-dom'
 import {FaBars,FaGithub,FaUser,FaSignOutAlt} from 'react-icons/fa'
 import styled from 'styled-components'
 import { NavHashLink } from 'react-router-hash-link';
@@ -19,12 +19,13 @@ const AppNavbar:FC<AppNavbarProps> = ({toggle,scrollWithOffset}) => {
     <Nav>
     <NavLink to='/'>
         <div className='logo'>
-            LOGO
+            Bitcuz
     </div>
     </NavLink>
     <Bars onClick={toggle}/>
     <NavMenu>
-        <NavLink  to='#section1' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)} >
+        
+        {/* <NavLink  to='#section1' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)} >
             Section 1
         </NavLink>
         <NavLink to='#section2' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}  >
@@ -38,22 +39,35 @@ const AppNavbar:FC<AppNavbarProps> = ({toggle,scrollWithOffset}) => {
         </NavLink>
         <NavLink to='#section5' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}  >
             Section 5
-        </NavLink>
+        </NavLink> */}
     </NavMenu>
     <NavBtn>
-        <NavBtnLink href='https://github.com/cinecus' target='_blank'>
-            <FaGithub size={18}/>
-                My Github
-        </NavBtnLink>
-        {
-            !!user?<NavBtnLink onClick={()=>dispatch(signOut())}>
+        {localStorage.getItem('token')?<>
+        <NavLink  to='/statement'  >
+            My Statement
+        </NavLink>
+        <NavLink  to='/depositAndWithdraw'  >
+            Deposit/Withdraw
+        </NavLink>
+        <NavLink  to='/transfer' >
+            Transfer
+        </NavLink>
+            <NavBtnLink onClick={()=>dispatch(signOut())}>
             <FaSignOutAlt size={18}/>
                 Sign Out
-        </NavBtnLink>:
-            <NavBtnLink href='/signin' >
+        </NavBtnLink>
+        </>
+        :
+        <>
+         <NavBtnLink href='/signin'>
             <FaUser size={18}/>
                 Sign In
         </NavBtnLink>
+            <NavBtnLink href='/signup' >
+            <FaUser size={18}/>
+                New Account
+        </NavBtnLink>
+        </>
         }
     </NavBtn>
 </Nav>
@@ -80,7 +94,7 @@ const Nav = styled.nav`
     } */
 `
 
-const NavLink = styled(NavHashLink)`
+const NavLink = styled(Link)`
     color:#fff !important;
     display:flex;
     align-items:center;
@@ -116,7 +130,6 @@ const Bars = styled(FaBars)`
 const NavMenu = styled.div`
     display:flex;
     align-items:center;
-    margin-right:-24px;
 
     @media screen and (max-width: 768px){
         display:none;

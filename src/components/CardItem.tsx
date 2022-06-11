@@ -1,11 +1,24 @@
 import styled from 'styled-components'
 
-const CardItem = styled.div`
+
+interface CardItemProps {
+   height?:string
+   hd_height?:string
+    bd_height?:string
+    ft_height?:string
+    hd_bg?:string
+    bd_bg?:string
+    ft_bg?:string
+}
+
+
+const CardItem = styled.div<CardItemProps>`
     width:auto;
-    height:400px; //set height
+    height:${({height})=>(`${height?height:'auto'}`)}; 
     .card-header{
-        height:10%;
-        background:#f5f5f5;
+        height:${({hd_height})=>(`${hd_height?hd_height:'15%'}`)};
+        background:${({hd_bg})=>(`${hd_bg?hd_bg:'#fffff'}`)};
+        padding:1rem;
         display:flex;
         justify-content:center;
         align-items:center;
@@ -14,8 +27,9 @@ const CardItem = styled.div`
         //position:absolute;
     }
     .card-body{
-        height:70%;
-        background:#555555;
+        height:${({bd_height})=>(`${bd_height?bd_height:'85%'}`)};
+        background:${({bd_bg})=>(`${bd_bg?bd_bg:'#555555'}`)};
+        padding:1rem;
         display:flex;
         justify-content:center;
         align-items:center;
@@ -27,8 +41,8 @@ const CardItem = styled.div`
         }
     }
     .card-footer{
-        height:20%;
-        background:#f9f9f9;
+        height:${({ft_height})=>(`${ft_height?ft_height:'0%'}`)};
+        background:${({ft_bg})=>(`${ft_bg?ft_bg:'#ffff6'}`)};
         display:flex;
         justify-content:center;
         align-items:center;

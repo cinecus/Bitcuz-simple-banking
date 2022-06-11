@@ -6,17 +6,27 @@ import { Form, Input, Button,message } from 'antd';
 import { useSignIn } from '../../../hooks/AuthHook';
 import { useAppSelector } from '../../../store/store';
 import {  useNavigate } from "react-router-dom";
+import CardItem from '../../../components/CardItem';
 
 const SigninPage:FC<any> = () => {
   const {mutate,isLoading,error} = useSignIn()
   const {user} = useAppSelector(state=>state.auth)
   const onFinish = (values: any) => {
     mutate({...values})
-    console.log('Success:', values);
+    //console.log('Success:', values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+  };
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
   };
 
   let navigate = useNavigate();
@@ -29,15 +39,18 @@ const SigninPage:FC<any> = () => {
   return (
     <AppWrapper>
       <AppGrid id='section1' bg='#bebebe' height='90vh'  pd='2rem 8rem' justifyContent='center' alignItems='center'>
-        <GridItem size={'50%'}  pd={'1rem'}>
-        <Form
-        name="basic"
+      <GridItem size={'45%'}  bg={'#656565'}>     
+        <CardItem>
+          <div className='card-header'>SIGN IN</div>
+          <div className='card-body'>
+          <Form
+          {...layout} 
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         >
           <Form.Item
-          label="Username"
+          label="Account"
           name="username"
           rules={[{ required: true, message: 'Please input your username!' }]}
           >
@@ -50,16 +63,18 @@ const SigninPage:FC<any> = () => {
           >
             <Input.Password />
           </Form.Item>
-        <Form.Item wrapperCol={{ offset: 4, }}>
+        <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
-      </Form>
         {
-          error && <p style={{color:'red'}}>* {error.message}</p>
+          error && <p style={{color:'red',fontSize:'1rem'}}>* {error.message}</p>
         }
-        </GridItem>
+      </Form>
+          </div>
+        </CardItem>
+      </GridItem>
       </AppGrid>
     </AppWrapper>
   )

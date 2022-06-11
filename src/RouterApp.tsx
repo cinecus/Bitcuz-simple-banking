@@ -12,6 +12,10 @@ import {
   HomePage,
   PhotoPage,
   SigninPage,
+  SignupPage,
+  DepositWithdrawPage,
+  TransferPage,
+  StatementPage,
   ErrorPage
 } from './modules/index'
 
@@ -57,6 +61,10 @@ const RouterApp = () => {
           <Route path='/photo' element={<PhotoPage/>}/>
         </Route>
         <Route path='/signin' element={<SigninPage/>}/>
+        <Route path='/signup' element={<SignupPage/>}/>
+        <Route path='/depositAndWithdraw' element={<DepositWithdrawPage/>}/>
+        <Route path='/transfer' element={<TransferPage/>}/>
+        <Route path='/statement' element={<StatementPage/>}/>
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
