@@ -1,8 +1,11 @@
 import React, { FC } from 'react'
-import {NavHashLink as LinkR} from 'react-router-hash-link'
-import {FaTimes,FaGithub} from 'react-icons/fa'
+import {Link as LinkR} from 'react-router-dom'
+import {FaBars,FaGithub,FaUser,FaSignOutAlt,FaTimes} from 'react-icons/fa'
 import styled from 'styled-components'
 
+
+import {useAppSelector,useAppDispatch} from '../store/store'
+import { signOut } from '../store/slices/authSlice';
 
 interface AppSidebarProps {
     isOpen:boolean,
@@ -15,7 +18,7 @@ interface SidebarContainerProps{
 }
 
 const AppSidebar:FC<AppSidebarProps> = ({isOpen,toggle,scrollWithOffset}) => {
-    
+    const dispatch = useAppDispatch()
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
     <Icon onClick={toggle}>
@@ -23,10 +26,16 @@ const AppSidebar:FC<AppSidebarProps> = ({isOpen,toggle,scrollWithOffset}) => {
     </Icon>
     <SidebarWrapper>
         <SidebarMenu>
-            <SidebarLink to='#section1' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}>
-            Section 1
+        <SidebarLink to='/'>
+                Home
             </SidebarLink>
-            <SidebarLink to='#section2' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}>
+            {localStorage.getItem('token')?
+            <SidebarLink to='/statement' >
+               My Statement
+            </SidebarLink>:
+            null
+            }
+            {/* <SidebarLink to='#section2' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}>
             Section 2
             </SidebarLink>
             <SidebarLink to='#section3' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}>
@@ -37,13 +46,25 @@ const AppSidebar:FC<AppSidebarProps> = ({isOpen,toggle,scrollWithOffset}) => {
             </SidebarLink>
             <SidebarLink to='#section5' smooth scroll={(el:HTMLElement) =>  scrollWithOffset(el, 80)}>
             Section 5
-            </SidebarLink>
+            </SidebarLink> */}
         </SidebarMenu>
         <SideBtnWrap>
-            <SidebarRoute href='https://github.com/cinecus' target='_blank'>
-            <FaGithub size={18}/>
-                My Github
+        {localStorage.getItem('token')?
+            <SidebarRoute onClick={()=>dispatch(signOut())}>
+                <FaSignOutAlt size={18}/>
+                    Sign Out
             </SidebarRoute>
+            :<>
+            <SidebarRoute href='/signin'>
+                <FaUser size={18}/>
+                    Sign In
+            </SidebarRoute>
+                <SidebarRoute href='/signup' >
+                <FaUser size={18}/>
+                    New Account
+            </SidebarRoute>
+            </>
+        }
         </SideBtnWrap>
     </SidebarWrapper>
 </SidebarContainer>
@@ -117,14 +138,18 @@ const SidebarLink = styled(LinkR)`
 
 const SideBtnWrap = styled.div`
     display:flex;
+    flex-direction:column;
     justify-content:center;
+    align-items:center;
+    row-gap:1rem;
 `
 
 const SidebarRoute = styled.a`
     border-radius:50px;
-    background:blueviolet;
+    background:#767676;
+    width:50%;
     white-space:nowrap;
-    padding:16px 64px;
+    padding:16px 10px;
     color:#010606;
     font-size:16px;
     outline:none;

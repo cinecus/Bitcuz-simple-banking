@@ -9,8 +9,14 @@ interface ConfirmModalProps{
     action?:any
 }
 
+
 interface ErrorModalProps{
   title?:string
+}
+
+interface SuccessModalProps{
+  title?:string
+  redirect?:any
 }
 
 const ConfirmModal = ({title,content,action}:ConfirmModalProps)=> {
@@ -26,11 +32,13 @@ const ConfirmModal = ({title,content,action}:ConfirmModalProps)=> {
         })
 }
 
-const SuccessModal = ()=>{
-    Modal.success({
-      title:'Your transaction is completed successfully',
-      // content: 'some messages...some messages...',
-    });
+const SuccessModal = ({redirect}:SuccessModalProps)=>{
+  Modal.success({
+    title:'Your transaction is completed successfully',
+    onOk(){
+      redirect()
+    }
+  });
 }
 
 const ErrorModal = ({title}:ErrorModalProps)=>{

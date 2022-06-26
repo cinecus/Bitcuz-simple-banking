@@ -4,23 +4,26 @@ import AppWrapper from '../../../components/AppWrapper'
 import AppGrid from '../../../components/AppGrid'
 import GridItem from '../../../components/GridItem'
 import TransactionTable from '../components/TransactionTable'
+import { useGetBalance } from '../../../hooks/TransactionHook'
 
 const StatementPage = () => {
+    const {data,isLoading,error}  = useGetBalance()
+    console.log(data)
   return (
     <AppWrapper>
-        <AppGrid bg='#bebebe'  pd='2rem 8rem' justifyContent='center' alignItems='start'>
+        <AppGrid   pd='2rem 8rem' justifyContent='center' alignItems='start'>
             <GridItem size='100%'>
-                <BalanceContainer bg='#bebebe' mg='2rem 0rem' justifyContent='space-between' alignItems='start' rgap='1rem'>
+                <BalanceContainer mg='2rem 0rem' justifyContent='space-between' alignItems='start' rgap='1rem'>
                     <div>
                         Welcome,Chananon Chantaratin
                     </div>
                     <div>
-                        Your Balance xxx TOKEN
+                        Your Balance {data?.result} TOKEN
                     </div>
                 </BalanceContainer>
-                <FilterContainer bg='#696669' height='20vh' justifyContent='center' alignItems='center'>
+                {/* <FilterContainer bg='#696669' height='20vh' justifyContent='center' alignItems='center'>
                     Filter
-                </FilterContainer>
+                </FilterContainer> */}
                 <TransactionTable />
             </GridItem>
         </AppGrid>

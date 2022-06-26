@@ -21,7 +21,7 @@ const TransactionTable = () => {
     // }]
   return (
     <TableContainer bg='#898989' pd='2rem'>
-        <TableStyle tableLayout='auto' columns={columns} dataSource={data?.result.account.transactions} bordered />
+        <TableStyle tableLayout='auto' columns={columns} dataSource={data?.result.account.transactions} bordered scroll={{x:800}}/>
     </TableContainer>
   )
 }

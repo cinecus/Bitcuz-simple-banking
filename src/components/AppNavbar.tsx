@@ -148,7 +148,7 @@ const NavBtn = styled.nav`
 
 const NavBtnLink = styled.a`
     border-radius:4px;
-    background:blueviolet;
+    background:#767676;
     padding:10px 22px;
     color:#fff;
     border:none;

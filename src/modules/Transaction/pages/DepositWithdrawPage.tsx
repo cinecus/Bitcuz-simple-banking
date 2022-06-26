@@ -36,7 +36,7 @@ const DepositWithdrawPage:any = () => {
     }
   return (
     <AppWrapper>
-          <AppGrid bg='#bebebe' height='90vh'  pd='2rem 8rem' justifyContent='center' alignItems='center'>
+          <AppGrid  height='90vh'  pd='2rem 8rem' justifyContent='center' alignItems='center'>
           <GridItem size={'45%'}  >    
               <CardItem>
                   <div className='card-header'>
