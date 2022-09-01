@@ -16,13 +16,13 @@ const TransferPage = () => {
     const {mutate:transfer} = useTransfer()
 
     const handleFinish=(values:{received_id:string,transfer:number})=>{
-
-        console.log('value', values)
-        ConfirmModal({
-            title:'ต้องการโอน token ใช่หรือไม่?',
-        content:`จำนวน ${values.transfer} TOKEN โอนไปยัง ${values.received_id}`,
-        action:()=>transfer({amount:values.transfer,ref_account:values.received_id })
-    })
+        transfer({amount:values.transfer,ref_account:values.received_id })
+        //console.log('value', values)
+    //     ConfirmModal({
+    //         title:'ต้องการโอน token ใช่หรือไม่?',
+    //     content:`จำนวน ${values.transfer} TOKEN โอนไปยัง ${values.received_id}`,
+    //     action:()=>transfer({amount:values.transfer,ref_account:values.received_id })
+    // })
     }
 
   return (

@@ -54,7 +54,7 @@ export const useTransfer:any=()=>{
         Authorization:localStorage.getItem('token')
       }}),{
         onSuccess:()=>{
-            SuccessModal({redirect:()=> navigate('/statement')})
+            // SuccessModal({redirect:()=> navigate('/statement')})
         },
         onError:(error:{message:string})=>{
             ErrorModal({title:error.message})

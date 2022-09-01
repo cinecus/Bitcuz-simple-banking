@@ -26,11 +26,12 @@ const DepositWithdrawPage:any = () => {
             action:()=>deposit({amount:values.deposit })
         })
         }else if(!!values.withdraw){
-            ConfirmModal({
-                title:'ต้องการถอน token ออกจากระบบใช่หรือไม่?',
-            content:`จำนวน ${values.withdraw} TOKEN`,
-            action:()=>withdraw({amount:values.withdraw })
-        })
+            withdraw({amount:values.withdraw })
+        //     ConfirmModal({
+        //         title:'ต้องการถอน token ออกจากระบบใช่หรือไม่?',
+        //     content:`จำนวน ${values.withdraw} TOKEN`,
+        //     action:()=>withdraw({amount:values.withdraw })
+        // })
         
         }
     }
